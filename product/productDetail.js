@@ -4,8 +4,6 @@ const router = express.Router();
 
 prdb.loadDatabase();
 
-
-
 router.post('/add',
     (req, res) => {
 
@@ -30,18 +28,16 @@ router.post('/add',
                     }
                 }
                 prdb.insert(data);
-                res.json({ message: "ADDED TO DATABASE" });
+                res.json({  status: 'Done',message: "ADDED TO DATABASE" });
             }
             else {
-                res.json({ message: "Product is already in database" });
+                res.json({ status: 'Error', message: "Product is already in database" });
             }
         })
     }
 );
 router.get('/all', (req, res) => {
     prdb.find({}, (err, doc) => {
-        console.log({data: doc});
-        
         res.send({data: doc});
     })
 })
